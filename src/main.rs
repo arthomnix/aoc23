@@ -1,6 +1,7 @@
 mod days;
 
 use std::env::args;
+use std::io::Read;
 use std::process::exit;
 use std::str::FromStr;
 use days::*;
@@ -35,7 +36,7 @@ static DAYS: [[fn(String) -> String; 2]; 25] = [
 
 fn main() {
     let args: Vec<String> = args().collect();
-    if args.len() != 2 {
+    if args.len() < 2 {
         print_usage();
     }
 
@@ -49,16 +50,24 @@ fn main() {
         print_usage();
     }
 
-    let aoc = libaoc::AocClient::new_from_env();
-    let text = aoc.get_input(2023, day).unwrap_or_else(|_| {
-        eprintln!("failed to retrieve input text");
-        exit(2);
-    });
+    let mut text: String;
+    if args.len() > 2 && args[2] == "real" {
+        let mut aoc = libaoc::AocClient::new_from_env();
+        text = aoc.get_input(2022, day).unwrap_or_else(|_| {
+            eprintln!("failed to retrieve input text");
+            exit(2);
+        });
+    } else {
+        println!("Enter your puzzle input, ending with Ctrl-D (EOF): (use 'aoc23 <day>:<part> real' to automatically download your real data)");
+        text = String::new();
+        std::io::stdin().read_to_string(&mut text).expect("Failed to read input from stdin!");
+        println!("\n");
+    }
 
     println!("{}", DAYS[day as usize - 1][part as usize - 1](text));
 }
 
 fn print_usage() -> ! {
-    eprintln!("Usage: aoc23 <day>:<part>");
+    eprintln!("Usage: aoc23 <day>:<part> [real]");
     exit(1);
 }
