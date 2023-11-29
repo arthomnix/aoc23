@@ -6,7 +6,7 @@ use std::process::exit;
 use std::str::FromStr;
 use days::*;
 
-static DAYS: [[fn(String) -> String; 2]; 25] = [
+static DAYS: [[fn(String); 2]; 25] = [
     [day1::part1, day1::part2],
     [day2::part1, day2::part2],
     [day3::part1, day3::part2],
@@ -64,7 +64,7 @@ fn main() {
         println!("\n");
     }
 
-    println!("{}", DAYS[day as usize - 1][part as usize - 1](text));
+    DAYS[day as usize - 1][part as usize - 1](text);
 }
 
 fn print_usage() -> ! {
