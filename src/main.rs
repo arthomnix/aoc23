@@ -4,6 +4,7 @@ use std::env::args;
 use std::io::Read;
 use std::process::exit;
 use std::str::FromStr;
+use std::time::{Duration, Instant};
 use days::*;
 
 static DAYS: [[fn(String); 2]; 25] = [
@@ -64,7 +65,15 @@ fn main() {
         println!("\n");
     }
 
+    let before = Instant::now();
     DAYS[day as usize - 1][part as usize - 1](text);
+    let time = Instant::now().duration_since(before);
+    let formatted_time = if time < Duration::from_secs(10) {
+        format!("Completed in {:.1}ms", time.as_secs_f64() / 1000.0)
+    } else {
+        format!("Completed in {:.3}s", time.as_secs_f64())
+    };
+    println!("{}{}", formatted_time, if cfg!(debug_assertions) { " (debug build)" } else { "" });
 }
 
 fn print_usage() -> ! {
