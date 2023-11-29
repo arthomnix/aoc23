@@ -53,7 +53,7 @@ fn main() {
     let mut text: String;
     if args.len() > 2 && args[2] == "real" {
         let mut aoc = libaoc::AocClient::new_from_env();
-        text = aoc.get_input(2022, day).unwrap_or_else(|_| {
+        text = aoc.get_input(2023, day).unwrap_or_else(|_| {
             eprintln!("failed to retrieve input text");
             exit(2);
         });
