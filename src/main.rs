@@ -1,11 +1,11 @@
 mod days;
 
+use days::*;
 use std::env::args;
 use std::io::Read;
 use std::process::exit;
 use std::str::FromStr;
 use std::time::{Duration, Instant};
-use days::*;
 
 static DAYS: [[fn(String); 2]; 25] = [
     [day1::part1, day1::part2],
@@ -61,7 +61,9 @@ fn main() {
     } else {
         println!("Enter your puzzle input, ending with Ctrl-D (EOF): (use 'aoc23 <day>:<part> real' to automatically download your real data)");
         text = String::new();
-        std::io::stdin().read_to_string(&mut text).expect("Failed to read input from stdin!");
+        std::io::stdin()
+            .read_to_string(&mut text)
+            .expect("Failed to read input from stdin!");
         println!("\n");
     }
 
@@ -73,7 +75,15 @@ fn main() {
     } else {
         format!("Completed in {:.3}s", time.as_secs_f64())
     };
-    println!("{}{}", formatted_time, if cfg!(debug_assertions) { " (debug build)" } else { "" });
+    println!(
+        "{}{}",
+        formatted_time,
+        if cfg!(debug_assertions) {
+            " (debug build)"
+        } else {
+            ""
+        }
+    );
 }
 
 fn print_usage() -> ! {
