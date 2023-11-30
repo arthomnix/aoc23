@@ -31,5 +31,5 @@ static DAYS: [[fn(String); 2]; 25] = [
 ];
 
 fn main() {
-    aoc_boilerplate::run(DAYS);
+    aoc_boilerplate::run(2023, DAYS);
 }

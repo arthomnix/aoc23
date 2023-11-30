@@ -27,7 +27,7 @@ dependencies = [
 [[package]]
 name = "aoc_boilerplate"
 version = "0.1.0"
-source = "git+https://github.com/arthomnix/aoc_boilerplate#ecf609cd623de6b25af5325313e8524acf6b7bb3"
+source = "git+https://github.com/arthomnix/aoc_boilerplate#dc11ff6d073a1259f0bfafe5059c5880f462a175"
 dependencies = [
  "libaoc",
 ]
