@@ -40,7 +40,7 @@ dependencies = [
 [[package]]
 name = "aoc_boilerplate"
 version = "0.1.0"
-source = "git+https://github.com/arthomnix/aoc_boilerplate#31f7b398a4f17d90a00c71434df4a07092326d37"
+source = "git+https://github.com/arthomnix/aoc_boilerplate#2ac9dbdb596e163552e4017b52a3aa94beedec5e"
 dependencies = [
  "libaoc",
 ]
@@ -529,7 +529,7 @@ checksum = "e2abad23fbc42b3700f2f279844dc832adb2b2eb069b2df918f455c4e18cc646"
 [[package]]
 name = "libaoc"
 version = "0.5.0"
-source = "git+https://github.com/arthomnix/libaoc#7ede4f804666f2b5742da57e614cd402e0a9d6bd"
+source = "git+https://github.com/arthomnix/libaoc#3e6ed28a3bc29ae26ea0fa55ad0f72ccf2eb46e7"
 dependencies = [
  "dirs",
  "reqwest",
