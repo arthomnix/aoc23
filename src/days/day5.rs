@@ -26,7 +26,7 @@ impl Mapping {
         } else {
             let mut v = vec![];
             if start < overlap_start {
-                v.push((start, overlap_start - start - 1, false));
+                v.push((start, overlap_start - start, false));
             }
             v.push((self.map(overlap_start).0, overlap_end - overlap_start, true));
             if max > overlap_end {
