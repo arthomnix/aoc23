@@ -1,13 +1,13 @@
 use std::str::FromStr;
 
 struct Mapping {
-    in_start: isize,
-    out_start: isize,
-    len: isize,
+    in_start: i64,
+    out_start: i64,
+    len: i64,
 }
 
 impl Mapping {
-    fn map(&self, input: isize) -> (isize, bool) {
+    fn map(&self, input: i64) -> (i64, bool) {
         if input >= self.in_start && input < self.in_start + self.len {
             (input + (self.out_start - self.in_start), true)
         } else {
@@ -15,11 +15,11 @@ impl Mapping {
         }
     }
 
-    fn map_range(&self, start: isize, len: isize) -> Vec<(isize, isize, bool)> {
+    fn map_range(&self, start: i64, len: i64) -> Vec<(i64, i64, bool)> {
         let max = start + len;
 
-        let overlap_start = isize::max(self.in_start, start);
-        let overlap_end = isize::min(self.in_start + self.len, max);
+        let overlap_start = i64::max(self.in_start, start);
+        let overlap_end = i64::min(self.in_start + self.len, max);
 
         if overlap_end < overlap_start {
             vec![(start, len, false)]
@@ -37,7 +37,7 @@ impl Mapping {
         }
     }
 
-    fn map_all_range(mappings: &[Self], start: isize, len: isize) -> Vec<(isize, isize)> {
+    fn map_all_range(mappings: &[Self], start: i64, len: i64) -> Vec<(i64, i64)> {
         if mappings.len() == 0 {
             return if len > 0 {
                 vec![(start, len)]
@@ -61,13 +61,13 @@ impl Mapping {
     }
 }
 
-fn get_seeds_maps(input: String) -> (Vec<isize>, Vec<Vec<Mapping>>) {
+fn get_seeds_maps(input: String) -> (Vec<i64>, Vec<Vec<Mapping>>) {
     let (seeds, maps) = input.split_once("\n\n").unwrap();
-    let seeds: Vec<isize> = seeds
+    let seeds: Vec<i64> = seeds
         .replace("seeds: ", "")
         .trim()
         .split(" ")
-        .map(|s| isize::from_str(s.trim()).unwrap())
+        .map(|s| i64::from_str(s.trim()).unwrap())
         .collect();
 
     let maps: Vec<Vec<Mapping>> = maps.split("\n\n").map(|map| {
@@ -75,7 +75,7 @@ fn get_seeds_maps(input: String) -> (Vec<isize>, Vec<Vec<Mapping>>) {
         lines.remove(0);
         let mut mappings = vec![];
         for l in lines {
-            let nums: Vec<isize> = l.split(" ").map(|s| isize::from_str(s.trim()).unwrap()).collect();
+            let nums: Vec<i64> = l.split(" ").map(|s| i64::from_str(s.trim()).unwrap()).collect();
             mappings.push(Mapping {
                 in_start: nums[1],
                 out_start: nums[0],
@@ -109,8 +109,8 @@ pub(crate) fn part1(input: String) {
 
 pub(crate) fn part2(input: String) {
     let (seeds, maps) = get_seeds_maps(input);
-    let seed_ranges: Vec<(isize, isize)> = seeds.chunks_exact(2).map(|chunk| (chunk[0], chunk[1])).collect();
-    let mut ranges: Vec<Vec<(isize, isize)>> = vec![seed_ranges];
+    let seed_ranges: Vec<(i64, i64)> = seeds.chunks_exact(2).map(|chunk| (chunk[0], chunk[1])).collect();
+    let mut ranges: Vec<Vec<(i64, i64)>> = vec![seed_ranges];
 
     for map in maps {
         let unmapped = ranges.last().unwrap();
