@@ -170,10 +170,23 @@ pub(crate) fn part2(input: String) {
                         inside = !inside;
                     }
                 }
+                print!("{}", match *c {
+                    '|' => '│',
+                    '-' => '─',
+                    'L' => '╰',
+                    'J' => '╯',
+                    'F' => '╭',
+                    '7' => '╮',
+                    _ => *c,
+                });
             } else if inside {
+                print!("█");
                 count += 1;
+            } else {
+                print!(" ");
             }
         }
+        println!();
     }
 
     println!("{count}");
