@@ -159,13 +159,11 @@ pub(crate) fn part2(input: String) {
         let mut entry_connects_down = false;
         for (x, c) in line.iter().enumerate() {
             if pipe_tiles.contains(&(x, y)) {
-                if *c == '|' {
+                if connects_up(*c) && connects_down(*c) && connects_down(grid[y-1][x]) && connects_up(grid[y+1][x]) {
                     inside = !inside;
-                }
-                else if connects_right(*c) && (connects_up(*c) || connects_down(*c)) {
+                } else if connects_right(*c) && (connects_up(*c) || connects_down(*c)) {
                     entry_connects_down = connects_down(*c);
-                }
-                else if connects_left(*c) && (connects_up(*c) || connects_down(*c)) {
+                } else if connects_left(*c) && (connects_up(*c) || connects_down(*c)) {
                     if entry_connects_down != connects_down(*c) {
                         inside = !inside;
                     }
