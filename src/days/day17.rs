@@ -211,12 +211,7 @@ fn day17(input: String, part2: bool) {
     for y in 0..grid.len() {
         for x in 0..grid[0].len() {
             if let Some(dir) = path.get(&(x, y)) {
-                print!("{}", match dir {
-                    Direction::Up => '^',
-                    Direction::Down => 'v',
-                    Direction::Left => '<',
-                    Direction::Right => '>',
-                }.to_string().bright_white());
+                print!("{}", dir.to_string().bright_white());
             } else {
                 print!("{}", grid[y][x]);
             }
