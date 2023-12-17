@@ -210,7 +210,9 @@ fn day17(input: String, part2: bool) {
     let (path_length, path) = straight_line_restricted_dijkstra((0, 0), (grid[0].len() - 1, grid.len() - 1), &grid, part2).unwrap();
     for y in 0..grid.len() {
         for x in 0..grid[0].len() {
-            if let Some(dir) = path.get(&(x, y)) {
+            if x == 0 && y == 0 {
+                print!("{}", "•".bright_white());
+            } else if let Some(dir) = path.get(&(x, y)) {
                 print!("{}", dir.to_string().bright_white());
             } else {
                 let n = grid[y][x] as u8;
