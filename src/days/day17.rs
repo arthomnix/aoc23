@@ -213,7 +213,8 @@ fn day17(input: String, part2: bool) {
             if let Some(dir) = path.get(&(x, y)) {
                 print!("{}", dir.to_string().bright_white());
             } else {
-                print!("{}", grid[y][x]);
+                let n = grid[y][x] as u8;
+                print!("{}", n.to_string().truecolor(255 - n * 28, 0, n * 28));
             }
         }
         println!();
