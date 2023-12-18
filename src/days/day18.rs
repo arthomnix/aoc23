@@ -65,7 +65,7 @@ fn shoelace(points: &[(i64, i64)]) -> i64 {
         let (x1, y1) = s[0];
         let (x2, y2) = s[1];
         (y1 + y2) * (x1 - x2)
-    }).sum::<i64>() / 2
+    }).sum::<i64>().abs() / 2
 }
 
 fn pick(points: &[(i64, i64)], b: i64) -> i64 {
