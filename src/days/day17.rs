@@ -109,7 +109,7 @@ fn straight_line_restricted_dijkstra(start: (usize, usize), goal: (usize, usize)
             cost,
             direction,
             straight_line,
-            prev: prev.clone(),
+            prev: prev.as_ref().map(|p| Rc::clone(p)),
         };
 
         if (x, y) == goal && (!ultra || straight_line >= 4) {
@@ -117,7 +117,7 @@ fn straight_line_restricted_dijkstra(start: (usize, usize), goal: (usize, usize)
             let mut p = prev;
             while let Some(s) = p {
                 m.insert(s.pos, s.direction);
-                p = s.prev.clone();
+                p = s.prev.as_ref().map(|p| Rc::clone(p));
             }
             m.insert((x, y), direction);
 
@@ -130,6 +130,8 @@ fn straight_line_restricted_dijkstra(start: (usize, usize), goal: (usize, usize)
 
         let mut adj = Vec::with_capacity(3);
 
+        let pprev = Rc::new(state);
+
         if can_move(direction, Direction::Down, straight_line, ultra) && y < grid.len() - 1 {
             let sl = if direction == Direction::Down {
                 straight_line + 1
@@ -141,7 +143,7 @@ fn straight_line_restricted_dijkstra(start: (usize, usize), goal: (usize, usize)
                 cost: cost + grid[y + 1][x],
                 direction: Direction::Down,
                 straight_line: sl,
-                prev: Some(Rc::new(state.clone())),
+                prev: Some(Rc::clone(&pprev)),
             });
         }
         if can_move(direction, Direction::Up, straight_line, ultra) && y > 0 {
@@ -155,7 +157,7 @@ fn straight_line_restricted_dijkstra(start: (usize, usize), goal: (usize, usize)
                 cost: cost + grid[y - 1][x],
                 direction: Direction::Up,
                 straight_line: sl,
-                prev: Some(Rc::new(state.clone())),
+                prev: Some(Rc::clone(&pprev)),
             });
         }
         if can_move(direction, Direction::Right, straight_line, ultra) && x < grid[0].len() - 1 {
@@ -169,7 +171,7 @@ fn straight_line_restricted_dijkstra(start: (usize, usize), goal: (usize, usize)
                 cost: cost + grid[y][x + 1],
                 direction: Direction::Right,
                 straight_line: sl,
-                prev: Some(Rc::new(state.clone())),
+                prev: Some(Rc::clone(&pprev)),
             })
         }
         if can_move(direction, Direction::Left, straight_line, ultra) && x > 0 {
@@ -183,7 +185,7 @@ fn straight_line_restricted_dijkstra(start: (usize, usize), goal: (usize, usize)
                 cost: cost + grid[y][x - 1],
                 direction: Direction::Left,
                 straight_line: sl,
-                prev: Some(Rc::new(state.clone())),
+                prev: Some(pprev),
             })
         }
 
