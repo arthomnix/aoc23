@@ -52,7 +52,7 @@ fn parse_input(input: String, part2: bool) -> Vec<(Direction, i64)> {
             let n = i64::from_str(v[1]).unwrap();
             (d, n)
         } else {
-            let hex = v[2].chars().filter(|c| c.is_ascii_alphanumeric()).collect::<String>();
+            let hex = v[2].chars().filter(char::is_ascii_alphanumeric).collect::<String>();
             let c = i64::from_str_radix(&hex, 16).unwrap();
             let d = Direction::from_i64(c & 0xF).unwrap();
             (d, c >> 4)
