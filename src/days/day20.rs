@@ -214,8 +214,6 @@ pub(crate) fn part1(input: String) {
         total_high_sent += additional_high_sent;
     }
 
-    dbg!(repeats);
-
     println!("{}", total_high_sent * total_low_sent);
 }
 
