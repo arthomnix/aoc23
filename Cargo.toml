@@ -9,3 +9,4 @@ edition = "2021"
 aoc_boilerplate = { git = "https://github.com/arthomnix/aoc_boilerplate" }
 colored = "2.1"
 regex = "1.10"
+derivative = "2.2"
