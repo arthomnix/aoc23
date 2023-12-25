@@ -46,6 +46,7 @@ dependencies = [
  "aoc_boilerplate",
  "colored",
  "derivative",
+ "rand",
  "regex",
  "z3",
 ]
